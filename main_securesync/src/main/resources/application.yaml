@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: main_securesync
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/securesync_db?serverTimezone=Asia/Seoul
+    username: ss_admin
+    # 실제 비밀번호를 지우고 변수명만 남겨둠
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+  jwt:
+    # 실제 키를 지우고 변수명만 남겨둠
+    secret: ${JWT_SECRET}
+    expiration: 86400000
+  main:
+    allow-bean-definition-overriding: true
+  logging:
+    level:
+      org.springframework.messaging: TRACE
+      org.springframework.web.socket: TRACE
+  jasypt:
+    encryptor:
+      # 실제 키를 지우고 변수명만 남겨둠
+      password: ${JASYPT_PASSWORD}
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+file:
+  notice-upload-dir: C:/uploads/notices
